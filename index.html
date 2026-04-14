@@ -1,24 +1,31 @@
-﻿<!DOCTYPE html><html lang='pt-br'><head><meta charset='UTF-16'>
-<style>body{font-family:'Segoe UI',sans-serif;background:#0f1117;color:#fff;padding:20px}
-.kpi-grid{display:flex;gap:15px;margin-bottom:20px}.kpi{background:#161b27;padding:20px;border-radius:10px;flex:1;border:1px solid #2d3748;text-align:center}
-.kpi b{font-size:26px;color:#60a5fa}.filters{margin:20px 0;display:flex;gap:8px;flex-wrap:wrap}
-.btn{padding:8px 16px;border-radius:20px;border:1px solid #2d3748;background:none;color:#94a3b8;cursor:pointer;transition:0.3s}
-.btn.active{background:#3b82f6;color:#fff;border-color:#3b82f6}table{width:100%;border-collapse:collapse;background:#161b27;border-radius:10px;overflow:hidden}
-th{text-align:left;background:#1e293b;padding:12px;color:#94a3b8;font-size:11px;text-transform:uppercase}
-td{padding:12px;border-bottom:1px solid #2d3748;font-size:13px}.r{text-align:right}.warn{background:#261c00}.crit{background:#261010}</style></head><body>
-<h2>Dashboard Transporte - ME 2026</h2>
-<div class='kpi-grid'><div class='kpi'><div>ORÇAMENTO TOTAL</div><b id='t'>R$ 0</b></div>
-<div class='kpi'><div>TOTAL CONSUMIDO</div><b id='c' style='color:#fb923c'>R$ 0</b></div>
-<div class='kpi'><div>SALDO DISPONÍVEL</div><b id='re' style='color:#4ade80'>R$ 0</b></div></div>
-<div class='filters' id='menu-filtros'></div>
-<table><thead><tr><th>PEDIDO</th><th>EMPRESA</th><th>FORNECEDOR</th><th class='r'>VALOR ANUAL</th><th class='r'>CONSUMIDO</th><th class='r'>RESTANTE</th><th class='r'>%</th></tr></thead><tbody id='tb'></tbody></table>
-<script>const D=[{"ped":"52770132","emp":"DROGASMIL","for":"BENEFICIO CERTO","tot": 5464852.38,"con": 5047278.08,"res": 417574.3,"pct": 92.4},{"ped":"54173544","emp":"DROGASMIL","for":"BENEFICIO CERTO","tot": 60001.6,"con": 7098.98,"res": 52902.62,"pct": 11.8},{"ped":"59217107","emp":"PROFARMA","for":"BENEFICIO CERTO","tot": 7708467.54,"con": 1962280.54,"res": 5746187,"pct": 25.5},{"ped":"59111055","emp":"PROFARMA HB","for":"BENEFICIO CERTO","tot": 31248.41,"con": 10258.03,"res": 20990.38,"pct": 32.8},{"ped":"52846517","emp":"ROSARIO","for":"BENEFICIO CERTO","tot": 2829325.5,"con": 2514633.31,"res": 314692.19,"pct": 88.9},{"ped":"52770591","emp":"TAMOIO 16 - DROGARIA REAL DE ICARAI LTDA ","for":"BENEFICIO CERTO","tot": 579730.06,"con": 37425.34,"res": 542304.72,"pct": 6.5},{"ped":"52824759","emp":"TAMOIO 17 - DROGARIA ESPFEL LTDA","for":"BENEFICIO CERTO","tot": 50742.68,"con": 42071.78,"res": 8670.89999999999,"pct": 82.9},{"ped":"52824795","emp":"TAMOIO 18 - FLORESCER FARMACIA  LTDA","for":"BENEFICIO CERTO","tot": 41557.68,"con": 30888.47,"res": 10669.21,"pct": 74.3},{"ped":"52770594","emp":"TAMOIO 19 - DROGARIA ROF LTDA","for":"BENEFICIO CERTO","tot": 57763.9,"con": 55000.25,"res": 2763.65,"pct": 95.2},{"ped":"52846499","emp":"TAMOIO 20 - DROGARIA MATER","for":"BENEFICIO CERTO","tot": 14129.96,"con": 1836.68,"res": 12293.28,"pct": 13},{"ped":"52824790","emp":"TAMOIO 21 - DROGARIA ROB GONCALENSE LTDA","for":"BENEFICIO CERTO","tot": 40936.72,"con": 38942.38,"res": 1994.34,"pct": 95.1},{"ped":"52846462","emp":"TAMOIO 22 - DROGARIA UNIAO DO ALCANTARA LTDA","for":"BENEFICIO CERTO","tot": 51816.79,"con": 42687.52,"res": 9129.27,"pct": 82.4},{"ped":"52824766","emp":"TAMOIO 23 - DROGARIA MG DE ITABORAI LTDA","for":"BENEFICIO CERTO","tot": 53007.65,"con": 34107.22,"res": 18900.43,"pct": 64.3},{"ped":"52846507","emp":"TAMOIO 24 - DROGARIA NAVARRO DE NITEROI LTDA","for":"BENEFICIO CERTO","tot": 17284.26,"con": 6418.73,"res": 10865.53,"pct": 37.1},{"ped":"52824794","emp":"TAMOIO 25 - DROGARIA V. R. GONCALENSE LTDA","for":"BENEFICIO CERTO","tot": 59357.65,"con": 47417.5,"res": 11940.15,"pct": 79.9},{"ped":"52846353","emp":"TAMOIO 26 - D OCEANIC DE ITAIPU DROGARIA LTDA","for":"BENEFICIO CERTO","tot": 19892.86,"con": 19726.1,"res": 166.759999999998,"pct": 99.2},{"ped":"52846490","emp":"TAMOIO 28 - DROGARIA F V DE ICARAI LTDA","for":"BENEFICIO CERTO","tot": 236491.06,"con": 194622.03,"res": 41869.03,"pct": 82.3},{"ped":"52824764","emp":"TAMOIO 31 - DROGARIA CIPRIANO DE SANTA ROSA LTDA","for":"BENEFICIO CERTO","tot": 2072506.13,"con": 1497158.17,"res": 575347.96,"pct": 72.2},{"ped":"52824769","emp":"TAMOIO 32 - DROGARIA ULTRAFARMA DE ICARAI","for":"BENEFICIO CERTO","tot": 38727.5,"con": 27546.21,"res": 11181.29,"pct": 71.1},{"ped":"52846332","emp":"TAMOIO 35 - DROGARIA CENTRAL DE ITAIPU LTDA","for":"BENEFICIO CERTO","tot": 55993.81,"con": 31056.85,"res": 24936.96,"pct": 55.5},{"ped":"52846460","emp":"TAMOIO 36 - LARGO DO PACO DROGARIA LTDA","for":"BENEFICIO CERTO","tot": 21021.56,"con": 17191.68,"res": 3829.88,"pct": 81.8},{"ped":"52846486","emp":"TAMOIO 37 - DROGARIA DB LTDA","for":"BENEFICIO CERTO","tot": 48466.07,"con": 36973.34,"res": 11492.73,"pct": 76.3},{"ped":"59098423","emp":"TAMOIO 38 - D N PERFUMARIA LTDA","for":"BENEFICIO CERTO","tot": 22532.05,"con": 2430.22,"res": 20101.83,"pct": 10.8},{"ped":"59111009","emp":"TAMOIO 39 - SUFAR SUPER MERCADO FARMACEUTICO LTDA","for":"BENEFICIO CERTO","tot": 36614.61,"con": 3544.92,"res": 33069.69,"pct": 9.7},{"ped":"52846504","emp":"TAMOIO 40 - DROGARIA ITAMARATY LTDA","for":"BENEFICIO CERTO","tot": 60000.72,"con": 44225.26,"res": 15775.46,"pct": 73.7},{"ped":"52846455","emp":"TAMOIO 41 - FARMACIA SAO SEBASTIAO LTDA","for":"BENEFICIO CERTO","tot": 58995.78,"con": 44383.88,"res": 14611.9,"pct": 75.2},{"ped":"52770602","emp":"TAMOIO 43 - NOVA DROGARIA TAMOIO LTDA","for":"BENEFICIO CERTO","tot": 56988.38,"con": 45047.71,"res": 11940.67,"pct": 79},{"ped":"60592080","emp":"SPECIALTY","for":"BENEFICIO CERTO","tot": 39454,"con": 5797.82,"res": 33656.18,"pct": 14.7},{"ped":"57704692","emp":"PROMOVENDAS","for":"BENEFICIO CERTO","tot": 2740.1,"con": 1072.87,"res": 1667.23,"pct": 39.2},{"ped":"60656665","emp":"LOCAFARMA","for":"BENEFICIO CERTO","tot": 370317.8,"con": 37589.5,"res": 332728.3,"pct": 10.2},{"ped":"52875201","emp":"ROSARIO","for":"CAJU","tot": 293436,"con": 0,"res": 293436,"pct": 0},{"ped":"59367850","emp":"TAMOIO 31 - DROGARIA CIPRIANO DE SANTA ROSA LTDA","for":"OPÇÃO JCA","tot": 322728,"con": 129376.89,"res": 193351.11,"pct": 40.1},{"ped":"60592049","emp":"DROGASMIL","for":"ESTACIONAMENTO","tot": 16360,"con": 0,"res": 16360,"pct": 0},{"ped":"60644436","emp":"PROFARMA","for":"ESTACIONAMENTO","tot": 113666,"con": 0,"res": 113666,"pct": 0},{"ped":"60583329","emp":"TAMOIO 31 - DROGARIA CIPRIANO DE SANTA ROSA LTDA","for":"ESTACIONAMENTO","tot": 41505,"con": 0,"res": 41505,"pct": 0},{"ped":"60644431","emp":"PROMOVENDAS","for":"ESTACIONAMENTO","tot": 4650,"con": 0,"res": 4650,"pct": 0},{"ped":"57789536","emp":"PROFARMA","for":"CAPTA","tot": 240000,"con": 153810.25,"res": 86189.75,"pct": 64.1}];const fmt=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2});let fAtivo='TODAS';
-function draw(){const b=document.getElementById('tb');b.innerHTML='';let st=0,sc=0,sr=0;
-D.filter(r=>fAtivo==='TODAS'||r.for.toUpperCase()===fAtivo).forEach(r=>{st+=r.tot;sc+=r.con;sr+=r.res;const tr=document.createElement('tr');
-if(r.pct>80)tr.className='crit';else if(r.pct>60)tr.className='warn';
-tr.innerHTML=`<td>${r.ped}</td><td>${r.emp}</td><td>${r.for}</td><td class='r'>${fmt(r.tot)}</td><td class='r'>${fmt(r.con)}</td><td class='r'>${fmt(r.res)}</td><td class='r'>${r.pct}%</td>`;b.appendChild(tr);});
-document.getElementById('t').innerText=fmt(st);document.getElementById('c').innerText=fmt(sc);document.getElementById('re').innerText=fmt(sr);}
-const listaFor=[...new Set(D.map(r=>r.for.toUpperCase()))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
-const menu=document.getElementById('menu-filtros');['TODAS',...listaFor].forEach(o=>{const btn=document.createElement('button');
-btn.className='btn'+(o===fAtivo?' active':'');btn.innerText=o;btn.onclick=()=>{fAtivo=o;document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');draw();};menu.appendChild(btn);});
-draw();</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal de Dashboards - ME 2026</title>
+    <style>
+        body { font-family: sans-serif; background: #0f1117; color: #fff; text-align: center; padding: 50px; }
+        .container { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+        .card { 
+            background: #161b27; padding: 30px; border-radius: 15px; border: 1px solid #2d3748;
+            text-decoration: none; color: #fff; width: 200px; transition: 0.3s;
+        }
+        .card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+        h1 { color: #60a5fa; }
+    </style>
+</head>
+<body>
+    <h1>Painéis de Controle ME 2026</h1>
+    <p>Selecione o dashboard que deseja visualizar:</p>
+    <div class="container">
+        <a href="saude.html" class="card">
+            <h2>Saúde</h2>
+            <p>Operadoras de Saúde</p>
+        </a>
+        <a href="transporte.html" class="card">
+            <h2>Transporte</h2>
+            <p>Vale Transporte</p>
+        </a>
+    </div>
+</body>
+</html>
